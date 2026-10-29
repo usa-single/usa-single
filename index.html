@@ -1,0 +1,260 @@
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#090b0a">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Discover new people and explore new connections at your own pace.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Discover New Connections — USA Connections">
+<meta property="og:description" content="Some of the best conversations start when you least expect them.">
+<meta property="og:image" content="preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Discover New Connections">
+<meta name="twitter:description" content="Meet new people at your own pace.">
+<meta name="twitter:image" content="preview.png">
+<title>Meet New People — USA Connections</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#090b0a;--white:#f5f6f2;--muted:#a6ada6;--green:#b9efc9;--line:rgba(255,255,255,.12);--radius:26px;--ease:cubic-bezier(.2,.75,.25,1)}
+*{box-sizing:border-box}
+html{min-height:100%;background:var(--bg);scroll-behavior:smooth}
+body{min-height:100vh;min-height:100dvh;margin:0;overflow-x:hidden;color:var(--white);background:var(--bg);font-family:"DM Sans",sans-serif;-webkit-font-smoothing:antialiased}
+button,a{font:inherit}a{-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible{outline:2px solid var(--green);outline-offset:4px}
+.video-bg{position:fixed;inset:-24px;z-index:0;overflow:hidden;background:radial-gradient(ellipse at 50% 35%,#29372e,#090b0a 70%);pointer-events:none}
+.video-bg video{width:100%;height:100%;object-fit:cover;filter:blur(25px) brightness(.29) saturate(.8);transform:scale(1.08)}
+.video-bg:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,7,5,.2),rgba(4,7,5,.4) 40%,#090b0a 100%),radial-gradient(ellipse at 50% 20%,transparent,rgba(0,0,0,.38) 75%)}
+.layout{position:relative;z-index:1;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;padding:24px 20px 22px}
+.nav,.footer{width:min(100%,1100px);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav{margin-bottom:auto}
+.brand{display:flex;align-items:center;gap:10px;color:var(--white);font-family:Manrope,sans-serif;font-size:13px;font-weight:800;letter-spacing:.7px}
+.brand-mark{width:34px;height:34px;display:grid;place-items:center;border:1px solid rgba(185,239,201,.32);border-radius:12px;color:var(--green);background:rgba(185,239,201,.08);font-size:17px}
+.nav-note{color:#d2d9d1;font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+.stage{width:min(100%,1100px);display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,440px);align-items:center;gap:clamp(28px,6vw,90px);margin:auto 0;padding:38px 0}
+.editorial{max-width:530px;padding:20px 0}
+.eyebrow{display:flex;align-items:center;gap:10px;color:var(--green);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase}
+.eyebrow:before{content:"";width:26px;height:1px;background:var(--green)}
+h1{margin:24px 0 20px;font-family:Manrope,sans-serif;font-size:clamp(42px,6vw,76px);font-weight:500;line-height:1.02;letter-spacing:-3.8px}
+h1 em{color:var(--green);font-weight:400}
+.editorial-copy{max-width:410px;margin:0;color:#b5bcb5;font-size:15px;line-height:1.85}
+.editorial-foot{display:flex;align-items:center;gap:12px;margin-top:34px;color:#d7ddd6;font-size:11px}
+.foot-line{width:36px;height:1px;background:rgba(185,239,201,.55)}
+.card{position:relative;overflow:hidden;width:100%;padding:24px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,rgba(28,34,29,.91),rgba(10,13,11,.94));box-shadow:0 35px 100px rgba(0,0,0,.4),inset 0 1px rgba(255,255,255,.05);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);animation:rise .7s var(--ease) both}
+.card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:23px}
+.card-kicker{color:#a9b1a8;font-size:10px;font-weight:700;letter-spacing:1.8px}
+.status{display:inline-flex;align-items:center;gap:7px;padding:8px 10px;border:1px solid rgba(185,239,201,.19);border-radius:50px;color:var(--green);background:rgba(185,239,201,.06);font-size:9px;font-weight:700;letter-spacing:.8px;white-space:nowrap}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+.portrait{position:relative;overflow:hidden;width:100%;aspect-ratio:1.08/1;border:1px solid rgba(255,255,255,.13);border-radius:19px;background:linear-gradient(140deg,#27362c,#111512)}
+.portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.portrait-fallback{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 30%,#405747,#151b16 72%);color:rgba(255,255,255,.5);font-size:12px;letter-spacing:1px;text-transform:uppercase}
+.portrait:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.7));pointer-events:none}
+.portrait-caption{position:absolute;z-index:1;left:17px;right:17px;bottom:16px;display:flex;align-items:end;justify-content:space-between;gap:12px}
+.person-name{margin:0;font-family:Manrope,sans-serif;font-size:27px;font-weight:700;letter-spacing:-.8px}
+.person-location{margin-top:5px;color:rgba(255,255,255,.8);font-size:11px}
+.portrait-tag{flex-shrink:0;padding:7px 9px;border:1px solid rgba(255,255,255,.23);border-radius:9px;background:rgba(0,0,0,.25);color:white;font-size:9px;backdrop-filter:blur(8px)}
+.intro{margin:18px 0 0;color:#b7beb7;font-size:12px;line-height:1.75}
+.divider{height:1px;margin:20px 0;background:var(--line)}
+.cta{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:56px;padding:16px 18px;overflow:hidden;border:1px solid rgba(255,255,255,.16);border-radius:15px;color:#102117;background:linear-gradient(115deg,#d0f4d8,#a6e8bb);text-decoration:none;font-size:13px;font-weight:800;transition:transform .25s var(--ease),filter .25s ease}
+.cta:after{content:"";position:absolute;top:-50%;bottom:-50%;left:-65%;width:35%;transform:rotate(20deg);background:rgba(255,255,255,.35);transition:left .55s ease}
+.cta:hover{transform:translateY(-2px);filter:brightness(1.04)}
+.cta:hover:after{left:130%}
+.cta-arrow{font-size:20px;line-height:1}
+.trust{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:13px;color:#929b92;font-size:10px;text-align:center;line-height:1.6}
+.disclosure{margin:12px 0 0;color:#8f998f;font-size:10px;line-height:1.6;text-align:center}
+.footer{margin-top:auto;padding-top:20px;color:#7f897f;font-size:10px;line-height:1.6}
+.footer a{color:#b7c1b7;text-decoration:underline;text-underline-offset:3px}
+.modal{position:fixed;z-index:10;inset:0;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(2,5,3,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.modal.open{display:flex;animation:fade .2s ease both}
+.modal-box{position:relative;width:min(100%,520px);max-height:min(82dvh,720px);overflow:auto;padding:32px 25px 25px;border:1px solid var(--line);border-radius:25px;background:linear-gradient(145deg,#202720,#0b0e0b);box-shadow:0 30px 100px rgba(0,0,0,.55)}
+.modal h2{margin:0 42px 14px 0;font-family:Manrope,sans-serif;font-size:25px;letter-spacing:-.8px}
+.modal p,.modal li{color:#b4bdb4;font-size:13px;line-height:1.8}
+.modal p{margin:0 0 14px}
+.modal ul{padding-left:20px}
+.close{position:absolute;top:12px;right:12px;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;color:white;background:rgba(255,255,255,.05);cursor:pointer}
+body.modal-open{overflow:hidden}
+[hidden]{display:none!important}
+@keyframes rise{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@media(min-width:1500px){.layout{padding-top:30px;padding-bottom:28px}}
+@media(max-width:800px){.layout{padding:16px 16px 14px}.nav{margin-bottom:22px}.stage{grid-template-columns:minmax(0,1fr);max-width:440px;gap:22px;margin:0 auto;padding:0 0 24px}.editorial{padding:8px 2px 0;text-align:center}.eyebrow{justify-content:center}h1{margin:16px 0 12px;font-size:clamp(36px,8vw,52px);letter-spacing:-2px}.editorial-copy{margin:0 auto;font-size:13px;line-height:1.7}.editorial-foot{justify-content:center;margin-top:18px}.card{padding:19px}.portrait{aspect-ratio:1.25/1}.footer{padding-top:16px}}
+@media(max-width:420px){.nav-note{max-width:125px;text-align:right;font-size:9px;letter-spacing:1px}.brand{font-size:11px}.brand-mark{width:31px;height:31px}.card{padding:16px;border-radius:21px}.card-top{margin-bottom:16px}.person-name{font-size:23px}.portrait{aspect-ratio:1.12/1}.intro{margin-top:13px}.divider{margin:15px 0}.footer{font-size:9px}}
+@media(max-height:760px) and (min-width:801px){.layout{padding-top:14px;padding-bottom:12px}.stage{padding:16px 0;gap:35px}h1{font-size:clamp(40px,5vw,60px)}.portrait{aspect-ratio:1.35/1}.card{padding:18px}.intro{margin-top:12px}.divider{margin:14px 0}.footer{padding-top:10px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<!-- CONFIGURATION: update these values before publishing. -->
+<script>
+const SITE_CONFIG = {
+  affiliateUrl: "https://llzwaj.magneticdattes.com/?utm_source=da57dc555e50572d&ban=other&j1=1&s1=189323&s2=1958812&s3=BOOGEYMAN&s5=BOOGEYMAN&click_id=Qk9PR0VZTUFOLFJPLDE4NS4xNjMuMTEwLjIwMSxXQVAsSU1PTkVUSVpFSVQ",
+  profileName: "Emily Carter",
+  profileAge: "38",
+  profileLocation: "Austin, Texas",
+  profileImage: "preview.jpg",
+  backgroundVideo: "was.mp4"
+};
+</script>
+
+<div class="video-bg" aria-hidden="true">
+  <video id="backgroundVideo" autoplay muted loop playsinline preload="metadata">
+    <source id="backgroundVideoSource" src="was.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="layout">
+  <header class="nav">
+    <a class="brand" href="#" aria-label="USA Connections home" id="homeLink">
+      <span class="brand-mark" aria-hidden="true">U</span><span>USA CONNECTIONS</span>
+    </a>
+    <div class="nav-note">New people · New possibilities</div>
+  </header>
+
+  <main class="stage">
+    <section class="editorial" aria-labelledby="pageTitle">
+      <div class="eyebrow">A place for new connections</div>
+      <h1 id="pageTitle">Sometimes<br>something great<br>starts with <em>hello.</em></h1>
+      <p class="editorial-copy">The best conversations can start when you least expect them. Discover a profile, get to know someone new, and see where the conversation takes you.</p>
+      <div class="editorial-foot"><span class="foot-line" aria-hidden="true"></span><span>Take things at your own pace</span></div>
+    </section>
+
+    <section class="card" aria-label="Featured profile">
+      <div class="card-top">
+        <span class="card-kicker">A PROFILE TO DISCOVER</span>
+        <span class="status"><span class="status-dot" aria-hidden="true"></span>FEATURED PROFILE</span>
+      </div>
+      <div class="portrait">
+        <div class="portrait-fallback" id="portraitFallback" hidden>Profile photo</div>
+        <img id="profileImage" src="preview.jpg" alt="Featured profile portrait">
+        <div class="portrait-caption">
+          <div><h2 class="person-name"><span id="profileName"></span></h2><div class="person-location" id="profileLocation"></div></div>
+          <span class="portrait-tag">PROFILE</span>
+        </div>
+      </div>
+      <p class="intro">Maybe it starts with a simple question. Maybe you hit it off right away. Take a look around and see what connections you might discover.</p>
+      <div class="divider" aria-hidden="true"></div>
+      <a class="cta" id="mainCTA" href="#" target="_blank" rel="nofollow sponsored noopener noreferrer">
+        <span>View profile</span><span class="cta-arrow" aria-hidden="true">↗</span>
+      </a>
+      <div class="trust"><span aria-hidden="true">◇</span><span>You decide whether you want to continue</span></div>
+      <p class="disclosure">This link may be an affiliate link. If you continue, the destination site’s terms and privacy policy apply.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>USA Connections</span>
+    <span>18+ · <a href="#privacy" id="privacyLink">Privacy Policy</a></span>
+  </footer>
+</div>
+
+<section class="modal" id="privacyModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
+  <div class="modal-box">
+    <button class="close" id="closePrivacy" aria-label="Close privacy policy">×</button>
+    <h2 id="privacyTitle">Privacy Policy</h2>
+    <p><strong>Last updated: October 29, 2026</strong></p>
+    <p>This page is a profile-discovery landing page. It does not include a form for submitting your name, email address, password, payment details, or other personal information.</p>
+    <p><strong>Technical information.</strong> The hosting provider may process standard technical information, such as IP address, browser type, and request logs, to deliver and secure this page. The exact information retained depends on the hosting provider’s configuration.</p>
+    <p><strong>External links and affiliate disclosure.</strong> The “View profile” button opens an external website. That website may use cookies, analytics, advertising technologies, or other data collection practices under its own policies. We do not control that website’s privacy practices. Review its privacy policy before sharing information there. The link may generate a referral commission at no additional cost to you.</p>
+    <p><strong>Your choices.</strong> You can leave this page without opening the external link. You can also configure your browser to restrict cookies and tracking, although some website features may not work as intended.</p>
+    <p><strong>Contact.</strong> Add a valid site-owner contact email or privacy contact here before publishing if visitors need a way to contact you about privacy questions.</p>
+    <p>This is a starter policy for this landing page, not legal advice. Update it to reflect your actual hosting, analytics, affiliate arrangements, jurisdiction, and contact details.</p>
+  </div>
+</section>
+
+<script>
+(() => {
+  "use strict";
+  const $ = (id) => document.getElementById(id);
+  const mainCTA = $("mainCTA");
+  const privacyModal = $("privacyModal");
+  const privacyLink = $("privacyLink");
+  const closePrivacy = $("closePrivacy");
+  const profileImage = $("profileImage");
+  const portraitFallback = $("portraitFallback");
+  let previousFocus = null;
+
+  $("profileName").textContent = `${SITE_CONFIG.profileName}, ${SITE_CONFIG.profileAge}`;
+  $("profileLocation").textContent = SITE_CONFIG.profileLocation;
+  profileImage.src = SITE_CONFIG.profileImage;
+  $("backgroundVideoSource").src = SITE_CONFIG.backgroundVideo;
+  $("backgroundVideo").load();
+
+  // Only allow standard web URLs; leave the CTA disabled if configuration is invalid.
+  try {
+    const destination = new URL(SITE_CONFIG.affiliateUrl);
+    if (destination.protocol !== "https:" && destination.protocol !== "http:") throw new Error("Unsupported URL protocol");
+    mainCTA.href = destination.href;
+  } catch (_) {
+    mainCTA.href = "#";
+    mainCTA.setAttribute("aria-disabled", "true");
+    mainCTA.title = "The destination link has not been configured correctly.";
+    mainCTA.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.alert("The destination link has not been configured correctly. Please check SITE_CONFIG.affiliateUrl.");
+    });
+  }
+
+  profileImage.addEventListener("error", () => {
+    profileImage.hidden = true;
+    portraitFallback.hidden = false;
+  });
+  profileImage.addEventListener("load", () => {
+    profileImage.hidden = false;
+    portraitFallback.hidden = true;
+  });
+
+  const video = $("backgroundVideo");
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    video.pause();
+  } else {
+    const playAttempt = video.play();
+    if (playAttempt && typeof playAttempt.catch === "function") playAttempt.catch(() => {});
+  }
+
+  function openPrivacy(event) {
+    if (event) event.preventDefault();
+    previousFocus = document.activeElement;
+    privacyModal.classList.add("open");
+    privacyModal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    closePrivacy.focus();
+  }
+  function hidePrivacy() {
+    privacyModal.classList.remove("open");
+    privacyModal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    if (previousFocus && typeof previousFocus.focus === "function") previousFocus.focus();
+  }
+  privacyLink.addEventListener("click", openPrivacy);
+  closePrivacy.addEventListener("click", hidePrivacy);
+  privacyModal.addEventListener("click", (event) => {
+    if (event.target === privacyModal) hidePrivacy();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && privacyModal.classList.contains("open")) hidePrivacy();
+    if (event.key === "Tab" && privacyModal.classList.contains("open")) {
+      const focusable = privacyModal.querySelectorAll('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])');
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault(); last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault(); first.focus();
+      }
+    }
+  });
+  $("homeLink").addEventListener("click", (event) => event.preventDefault());
+})();
+</script>
+</body>
+</html>
+'''
+path = Path("/mnt/data/usa_connections_final.html")
+path.write_text(html, encoding="utf-8")
+print(f"Created: {path} ({path.stat().st_size:,} bytes)")
